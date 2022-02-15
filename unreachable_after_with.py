@@ -7,7 +7,14 @@ This file demonstrates that code inside a `with` block may not be executed, and 
 from contextlib import suppress
 
 
-with suppress(ValueError):
+def raiser() -> NoReturn:
   raise ValueError("You knew this would happen")
+
+
+def main() -> str:
+  with suppress(ValueError):
+    return raiser()
   
-print("but here we are")
+  return "but here we are"
+
+print(main())
